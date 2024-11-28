@@ -1,53 +1,43 @@
 const express = require("express");
-const passport = require("passport");
-const User = require("../models/User");
 const jwt = require("jsonwebtoken");
-var bcrypt = require("bcrypt");
+const bcrypt = require("bcrypt");
+const User = require("../models/User");
 
 const router = express.Router();
 
-router.post("/login", async(req, res, next) => {
+router.post("/", async (req, res) => {
     const { email, password } = req.body;
-    try {
-        User.findOne({ email: email }, (err, doc) => {
-            console.log(doc);
-            if (err) {} else {
-                if (!doc) {} else {
-                    bcrypt.compare(password, doc.password, function(error, response) {
-                        console.log(response);
-                        const token = jwt.sign({ doc }, "top_secret");
-                        res.status(200).json({ token });
-                    });
-                }
-            }
-        });
-    } catch (error) {}
-    // passport.authenticate("login", async(err, user, info) => {
-    //     try {
-    //         if (err || !user) {
-    //             const error = new Error("No User Found");
-    //             console.log("Yellow", err);
-    //             return next(error);
-    //         }
-    //         req.login(user, { session: false }, async(error) => {
-    //             if (error) return next(error);
-    //             const body = {
-    //                 _id: user._id,
-    //                 name: user.name,
-    //                 email: user.email,
-    //                 gender: user.gender,
-    //             };
-    //             const token = jwt.sign({ user: body }, "top_secret");
-    //             return res.json({ token });
-    //         });
-    //     } catch (error) {
-    //         return next(error);
-    //     }
-    // })(req, res, next);
-});
 
-// router.get('/Login', (req, res) => {
-//     res.send("Login Here")
-// })
+    // Check if email and password are provided
+    if (!email || !password) {
+        return res.status(400).json({ message: "Email and password are required." });
+    }
+
+    try {
+        // Find user by email
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(401).json({ message: "Invalid email or password." });
+        }
+
+        // Compare password
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return res.status(401).json({ message: "Invalid email or password." });
+        }
+
+        // Generate JWT token
+        const token = jwt.sign(
+            { id: user._id, email: user.email },
+            "top_secret", // Use a strong secret key in production
+            { expiresIn: "1h" }
+        );
+
+        return res.status(200).json({ message: "Login successful.", token });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: "Server error." });
+    }
+});
 
 module.exports = router;

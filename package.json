@@ -5,5 +5,8 @@
   },
   "devDependencies": {
     "gh-pages": "^4.0.0"
+  },
+  "scripts": {
+    "devStart": "npx nodemon ./bin/www"
   }
 }
