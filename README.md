@@ -49,23 +49,23 @@ This project also demonstrates:
 **Screenshots:**
 Landing Page:
 
-![](documentationResources/homepage.png)
+![](assets/homepage.png)
 
 Signing In Page:
 
-![](documentationResources/login.png)
+![](assets/login.png)
 
 Flight Selection Page:
 
-![](documentationResources/booking.png)
+![](assets/booking.png)
 
 Seat Selection Page:
 
-![](documentationResources/seatselection.png)
+![](assets/seatselection.png)
 
 Ticket Cancellation Page:
 
-![](documentationResources/cancellation.png)
+![](assets/cancellation.png)
 
 ---
 
