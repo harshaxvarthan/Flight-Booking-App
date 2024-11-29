@@ -59,21 +59,6 @@ Flight Selection Page:
 
 ![](documentationResources/booking.png)
 
-Seat Selection Page:
-
-![](documentationResources/seatselection.png)
-
-Payment & Confirmation Page:
-
-![](documentationResources/payment.png)
-
-Ticket Cancellation Page:
-
-![](documentationResources/cancellation.png)
-
-Integrated AI Chatbot:
-
-![](documentationResources/aichatbot.png)
 ---
 
 ## Developed With
