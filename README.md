@@ -59,6 +59,14 @@ Flight Selection Page:
 
 ![](documentationResources/booking.png)
 
+Seat Selection Page:
+
+![](documentationResources/seatselection.png.png)
+
+Ticket Cancellation Page:
+
+![](documentationResources/cancellation.png)
+
 ---
 
 ## Developed With
